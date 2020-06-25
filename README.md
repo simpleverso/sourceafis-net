@@ -1,5 +1,30 @@
 # SourceAFIS for .NET #
 
+target framework net. 4.0
+
+example:
+            AfisEngine Afis = new AfisEngine();
+
+            Fingerprint fp1 = new Fingerprint();
+            fp1.AsBitmap = new Bitmap(@"G:\huellas\yo\pulgar derecho.png");
+
+            Fingerprint fp2 = new Fingerprint();
+            fp2.AsBitmap = new Bitmap("huella.png");
+
+            Person person1 = new Person();
+            person1.Fingerprints.Add(fp1);
+
+            Person person2 = new Person();
+            person2.Fingerprints.Add(fp2);
+
+            Afis.Extract(person1);
+            Afis.Extract(person2);
+
+            float score = Afis.Verify(person1, person2);
+            bool match = (score > 0);
+            MessageBox.Show("res:"+match.ToString()+" "+score);
+
+
 SourceAFIS is a fingerprint recognition engine that takes a pair of human fingerprint images and returns their similarity score.
 It can do 1:1 comparisons as well as efficient 1:N search. This is the .NET implementation of the SourceAFIS algorithm.
 
